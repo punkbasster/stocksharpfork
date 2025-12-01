@@ -228,7 +228,7 @@ public class UserInfoMessage : BaseSubscriptionIdMessage<UserInfoMessage>, ITran
 			destination.Features = [.. Features];
 
 		if (Permissions?.Count > 0)
-			destination.Permissions.AddRange(Permissions.ToDictionary());
+			destination.Permissions.AddRange(Permissions.ToDictionary(p => p.Key, p => p.Value));
 
 		destination.IsTrialVerified = IsTrialVerified;
 	}

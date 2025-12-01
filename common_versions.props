@@ -8,6 +8,15 @@
     <MsTestSdkVer>17.13.0</MsTestSdkVer>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net8'))">
+    <LangVersion>12.0</LangVersion>
+    <MsExtensionsVer>8.*</MsExtensionsVer>
+    <MicrosoftCodeAnalysisVer>4.12.0</MicrosoftCodeAnalysisVer>
+    <MicrosoftCodeAnalysisAnalyzersVer>3.3.4</MicrosoftCodeAnalysisAnalyzersVer>
+    <MsTestVer>3.11.1</MsTestVer>
+    <MsTestSdkVer>17.13.0</MsTestSdkVer>
+  </PropertyGroup>
+
   <PropertyGroup Condition="$(TargetFramework.StartsWith('net10'))">
     <LangVersion>14.0</LangVersion>
     <MsExtensionsVer>10.*</MsExtensionsVer>

@@ -264,7 +264,7 @@ public class CsvExtendedInfoStorage : IExtendedInfoStorage
 				var i = 0;
 				foreach (var pair in _cache)
 				{
-					retVal[i] = Tuple.Create(pair.Key, (IDictionary<string, object>)pair.Value.ToDictionary());
+					retVal[i] = Tuple.Create(pair.Key, (IDictionary<string, object>)pair.Value.ToDictionary(p => p.Key, p => p.Value));
 					i++;
 				}
 
@@ -275,7 +275,7 @@ public class CsvExtendedInfoStorage : IExtendedInfoStorage
 		IDictionary<string, object> IExtendedInfoStorageItem.Load(SecurityId securityId)
 		{
 			lock (_lock)
-				return _cache.TryGetValue(securityId)?.ToDictionary();
+				return _cache.TryGetValue(securityId)?.ToDictionary(p => p.Key, p => p.Value);
 		}
 
 		void IExtendedInfoStorageItem.Delete(SecurityId securityId)

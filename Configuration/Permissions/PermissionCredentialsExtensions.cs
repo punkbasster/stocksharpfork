@@ -54,7 +54,7 @@ public static class PermissionCredentialsExtensions
 
 		foreach (var permission in credentials.Permissions)
 		{
-			message.Permissions.Add(permission.Key, permission.Value.ToDictionary());
+			message.Permissions.Add(permission.Key, permission.Value.ToDictionary(p => p.Key, p => p.Value));
 		}
 
 		return message;

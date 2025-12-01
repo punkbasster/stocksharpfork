@@ -966,7 +966,7 @@ partial class Connector
 				{
 					if (!cloned)
 					{
-						changes = changes.ToDictionary();
+						changes = changes.ToDictionary(p => p.Key, p => p.Value);
 						cloned = true;
 					}
 
@@ -979,7 +979,7 @@ partial class Connector
 				{
 					if (!cloned)
 					{
-						changes = changes.ToDictionary();
+						changes = changes.ToDictionary(p => p.Key, p => p.Value);
 						cloned = true;
 					}
 

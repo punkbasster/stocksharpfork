@@ -1300,7 +1300,7 @@ public static partial class Extensions
 							var parts3 = s2.Split('-');
 							return new Range<TimeSpan>(parts3[0].ToTimeSpan(_timeFormat), parts3[1].ToTimeSpan(_timeFormat));
 						})]);
-					}).ToDictionary()
+					}).ToDictionary(p => p.Key, p => p.Value)
 				});
 			}
 		}

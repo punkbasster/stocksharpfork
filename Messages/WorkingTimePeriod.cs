@@ -77,7 +77,7 @@ public class WorkingTimePeriod : Cloneable<WorkingTimePeriod>, IPersistable
 			new KeyValuePair<DayOfWeek, Range<TimeSpan>[]>(
 				s.GetValue<DayOfWeek>("Day"),
 				[.. s.GetValue<IEnumerable<SettingsStorage>>("Periods").Select(s1 => s1.ToRange<TimeSpan>())]))
-		.ToDictionary();
+		.ToDictionary(p => p.Key, p => p.Value);
 	}
 
 	/// <summary>
