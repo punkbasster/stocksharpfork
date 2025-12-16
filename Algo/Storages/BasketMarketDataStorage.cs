@@ -188,8 +188,23 @@ public class BasketMarketDataStorage<TMessage> : Disposable, IMarketDataStorage<
 
 		async ValueTask IAsyncDisposable.DisposeAsync()
 		{
-			foreach (var enumerator in _enumerators.CopyAndClear())
-				await enumerator.Item2.enu.DisposeAsync();
+			// Drain the priority queue manually to avoid CopyAndClear() which uses
+			// unsupported CopyTo() method on PriorityQueue
+			while (true)
+			{
+				(long, (IAsyncEnumerator<Message> enu, IMarketDataStorage, long))? item = null;
+
+				lock (_enumerators)
+				{
+					if (_enumerators.Count == 0)
+						break;
+
+					item = _enumerators.Dequeue();
+				}
+
+				if (item.HasValue)
+					await item.Value.Item2.enu.DisposeAsync();
+			}
 
 			_actions.Clear();
 
